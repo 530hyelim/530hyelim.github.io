@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface StarData {
     x: number;
@@ -14,113 +14,98 @@ interface ScreenData {
     c: [number, number];
 }
 
-const starsParams = { speed: 0.4, number: 400, extinction: 2 };
+const starsParams = { baseSpeed: 0.3, number: 300, extinction: 2 };
 
 class Star implements StarData {
     x: number;
     y: number;
     z: number;
-    
+
     constructor(width: number, height: number) {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
         this.z = Math.random() * width;
     }
 
-    move = (width: number) => {
-        this.z -= starsParams.speed;
-        if (this.z <= 0) {
-            this.z = width;
-        }
-    };
+    move(width: number) {
+        this.z -= starsParams.baseSpeed;
+        if (this.z <= 0) this.z = width;
+    }
 
-    show = (ctx: CanvasRenderingContext2D, screen: ScreenData) => {
+    show(ctx: CanvasRenderingContext2D, screen: ScreenData) {
         const { w, c } = screen;
-        let x, y, rad, opacity;
+        let x = (this.x - c[0]) * (w / this.z) + c[0];
+        let y = (this.y - c[1]) * (w / this.z) + c[1];
+        let rad = w / this.z;
+        rad = Math.max(0.5, rad);
 
-        x = (this.x - c[0]) * (w / this.z) + c[0];
-        y = (this.y - c[1]) * (w / this.z) + c[1];
-        rad = w / this.z;
-        
-        opacity = (rad > starsParams.extinction) ? 0.5 * (2 - rad / starsParams.extinction) : 1;
-        rad = Math.max(0.5, rad); 
+        const opacity = Math.max(0.1, Math.min(1, 1.2 - rad / starsParams.extinction));
 
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.fillStyle = `rgba(255,255,255,${opacity})`;
         ctx.arc(x, y, rad, 0, Math.PI * 2);
         ctx.fill();
-    };
+    }
 }
 
 const useStarCanvas = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const animationFrameRef = useRef<number | null>(null); 
+    const animationFrameRef = useRef<number | null>(null);
+    const starsRef = useRef<Star[]>([]);
+    const screenRef = useRef<ScreenData | null>(null);
 
-    const setupAndAnimate = useCallback(() => {
+    useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        let screen: ScreenData;
-        let starsElements: StarData[];
+        const setup = () => {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
 
-        const setupStars = () => {
-            screen = {
-                w: window.innerWidth,
-                h: window.innerHeight,
-                c: [window.innerWidth * 0.5, window.innerHeight * 0.5]
+            screenRef.current = {
+                w,
+                h,
+                c: [w * 0.5, h * 0.5],
             };
-            
-            canvas.width = screen.w;
-            canvas.height = screen.h;
-            starsElements = [];
-            for (let i = 0; i < starsParams.number; i++) {
-                starsElements.push(new Star(screen.w, screen.h));
-            }
+
+            canvas.width = w;
+            canvas.height = h;
+
+            const numStars = Math.floor((w * h) / 6000);
+            starsRef.current = Array.from({ length: numStars }, () => new Star(w, h));
         };
-        
-        const updateStars = () => {
-            ctx.fillStyle = "#121212"; 
+
+        const render = () => {
+            const screen = screenRef.current!;
+            ctx.fillStyle = '#121212';
             ctx.fillRect(0, 0, screen.w, screen.h);
-            
-            starsElements.forEach(s => {
+
+            starsRef.current.forEach((s) => {
                 s.show(ctx, screen);
-                s.move(screen.w); 
+                s.move(screen.w);
             });
-            
-            animationFrameRef.current = window.requestAnimationFrame(updateStars);
+
+            animationFrameRef.current = requestAnimationFrame(render);
         };
 
-        setupStars();
-        
-        if (animationFrameRef.current) {
-            window.cancelAnimationFrame(animationFrameRef.current);
-        }
-        animationFrameRef.current = window.requestAnimationFrame(updateStars);
-
-        return () => {
-            if (animationFrameRef.current) {
-                window.cancelAnimationFrame(animationFrameRef.current);
-            }
-        };
-    }, []);
-
-    useEffect(() => {
-        const cleanUp = setupAndAnimate(); 
+        setup();
+        render();
 
         const handleResize = () => {
-            setupAndAnimate(); 
+            cancelAnimationFrame(animationFrameRef.current!);
+            setup();
+            render();
         };
 
         window.addEventListener('resize', handleResize);
 
         return () => {
             window.removeEventListener('resize', handleResize);
-            cleanUp?.(); 
+            cancelAnimationFrame(animationFrameRef.current!);
         };
-    }, [setupAndAnimate]);
+    }, []);
 
     return canvasRef;
 };
