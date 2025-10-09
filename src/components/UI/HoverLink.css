@@ -1,0 +1,22 @@
+.hover-link {
+    position: relative;
+    overflow: hidden;
+    line-height: 0.9;
+    text-decoration: none;
+}
+
+.hover-link > div {
+    transition: transform 0.3s ease-out;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.hover-link > div:nth-child(n+2) {
+    position: absolute;
+    color: var(--accent-color);
+}
+
+.hover-link:hover > div {
+    transform: translateY(-100%);
+}

@@ -1,0 +1,124 @@
+.main-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    z-index: 10;
+    padding-top: 100px;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 80px;
+    }
+}
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 80px;
+}
+
+.land {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .land {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .right-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        padding-top: 40px;
+        space-y: 32px;
+    }
+}
+
+.space-y-8>*:not(:last-child) {
+    margin-bottom: 32px;
+}
+
+.hi {
+    font-size: 3.8rem;
+    line-height: 1.1;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.state {
+    font-size: 1.125rem;
+    color: #a0a0a0;
+    line-height: 1.5;
+    max-width: 768px;
+}
+
+@media (min-width: 768px) {
+    .state {
+        font-size: 1.25rem;
+    }
+}
+
+.work-section-title {
+    font-weight: 900;
+}
+
+@media (min-width: 768px) {
+    .work-section-title {
+        font-size: 3.75rem;
+        margin-top: 160px;
+    }
+}
+
+.footer-section {
+    padding-top: 128px;
+    padding-bottom: 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    border-top: 1px solid #333;
+    padding-top: 40px;
+}
+
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.footer-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col a {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: var(--text-light);
+}

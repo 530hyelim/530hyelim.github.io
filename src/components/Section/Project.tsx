@@ -1,9 +1,10 @@
 import { projects } from "../../data/ProjectData";
 import { Link } from "react-router-dom";
+import './Project.css';
 
 const Project: React.FC = () => {
     return (
-        <section id="project">
+        <section id="project" className="project-container">
             <h1 className="work-section-title">🚀 Projects</h1>
             {projects.map((project, index) => (
                 <div key={project.id} className="project-item">

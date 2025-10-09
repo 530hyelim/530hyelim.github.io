@@ -22,10 +22,8 @@
 
 .timeline-content {
     background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     padding: 16px 20px;
-    backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
 }
 
@@ -41,6 +39,7 @@
         padding: 2rem 0;
         gap: 2rem;
         position: relative;
+        height: auto;
     }
 
     .timeline-horizontal-svg {
@@ -50,6 +49,10 @@
     .timeline-horizontal-item {
         position: relative !important;
         width: 50%;
+    }
+
+    .timeline-content {
+        backdrop-filter: blur(8px);
     }
 
     .timeline-horizontal-container::before {

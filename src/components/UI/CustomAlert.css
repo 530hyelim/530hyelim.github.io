@@ -1,0 +1,28 @@
+.custom-alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 50px);
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.custom-alert.success {
+    background: linear-gradient(90deg, #00c3ff, #00ff99);
+}
+
+.custom-alert.error {
+    background: linear-gradient(90deg, #ff4444, #ff9900);
+}
+
+.custom-alert.active {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}

@@ -249,19 +249,24 @@ const ProjectDetail: React.FC = () => {
 
             <motion.div className="action-bar" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
                 {project.websiteUrl && (
-                    <button className="action-button">
-                        <a href={project.websiteUrl} target="_blank" rel="noopener noreferrer">
-                            홈페이지 이동
-                        </a>
+                    <button
+                        className="action-button"
+                        onClick={() => window.open(project.websiteUrl, "_blank", "noopener,noreferrer")}
+                    >
+                        홈페이지 이동
                     </button>
                 )}
-                <button onClick={handleScrollToTop} className="action-button">처음으로</button>
+
+                <button onClick={handleScrollToTop} className="action-button">
+                    처음으로
+                </button>
 
                 {project.githubUrl && (
-                    <button className="action-button">
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                            코드 보러가기
-                        </a>
+                    <button
+                        className="action-button"
+                        onClick={() => window.open(project.githubUrl, "_blank", "noopener,noreferrer")}
+                    >
+                        코드 보러가기
                     </button>
                 )}
             </motion.div>

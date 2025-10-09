@@ -61,7 +61,7 @@ const About: React.FC = () => {
                                 scale: [0.8, 1],
                                 y: [20, 0],
                                 transition: {
-                                    delay: 0.6 + i * 0.7,
+                                    delay: 0.3 + i * 0.3,
                                     duration: 0.6,
                                     ease: "easeOut",
                                 },

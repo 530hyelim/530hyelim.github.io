@@ -1,8 +1,10 @@
 import React from 'react';
 import HoverLink from '../components/UI/HoverLink';
-import resume from '../assets/이력서_서혜림.pdf';
 import About from '../components/Section/About';
 import Project from '../components/Section/Project';
+import Skills from '../components/Section/Skills';
+import Contact from '../components/Section/Contact';
+import './HomePage.css';
 
 const HomePage: React.FC = () => {
   return (
@@ -30,30 +32,18 @@ const HomePage: React.FC = () => {
 
               <div className="right right-links space-y-8">
                 <HoverLink href="#about" text="About" className="font-bold" />
+                <HoverLink href="#skills" text="Skills" className="font-bold" />
                 <HoverLink href="#project" text="Project" className="font-bold" />
-                <HoverLink href={resume} text="Resume" target="_blank" className="font-bold" />
+                <HoverLink href="#contact" text="Contact" className="font-bold" />
               </div>
             </div>
           </div>
         </section>
 
         <About />
+        <Skills />
         <Project />
-
-        <div className="footer-section">
-          <footer className="footer-base">
-            <div className="footer-grid">
-              <div className="footer-col">
-                <h4 className="footer-title"> Built By <br /> Hyelim Seo</h4>
-                <ul>
-                  <li>
-                    <a href="mailto:530hyelim@gmail.com" target="_blank" data-cursor-pointer>Reach out to me </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </footer>
-        </div>
+        <Contact />
       </main>
     </div>
   );

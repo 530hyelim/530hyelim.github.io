@@ -79,7 +79,6 @@
     padding: 50px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(20px);
 }
 
 .project-section h2 {
@@ -153,29 +152,21 @@
     justify-content: center;
     gap: 20px;
     padding: 30px 20px;
-    margin-top: 50px;
-    border-top: 1px solid #636363;
 }
 
 .action-button {
-    background: rgba(4, 4, 4, 0.8);
-    border: 2px solid rgba(179, 136, 255, 0.2);
-    color: var(--text-light);
-    padding: 14px 28px;
-    border-radius: 12px;
-    font-size: 1.1rem;
+    background: linear-gradient(90deg, #00c3ff, #ffff1c);
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: 0.3s ease;
 }
 
 .action-button:hover {
-    border-color: #00e5ff; 
-    background: linear-gradient(45deg, rgba(0, 229, 255, 0.1), rgba(179, 136, 255, 0.1));
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 229, 255, 0.4); 
-}
-
-.action-button a {
-    color: inherit;
-    text-decoration: none;
+    transform: scale(1.05);
+    box-shadow: 0 0px 25px rgba(0, 229, 255, 0.4); 
 }
 
 @media (max-width: 640px) {
