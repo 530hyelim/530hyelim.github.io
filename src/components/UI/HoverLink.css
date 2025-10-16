@@ -1,22 +1,44 @@
 .hover-link {
     position: relative;
     overflow: hidden;
-    line-height: 0.9;
+    display: block;
+    line-height: 1.2;
     text-decoration: none;
+    width: fit-content;
 }
 
-.hover-link > div {
+.hover-link>div {
+    transform: translateY(0);
     transition: transform 0.3s ease-out;
-    font-size: 1.9rem;
-    font-weight: 700;
     color: var(--text-light);
+    font-size: 1.875rem;
+    font-weight: 700;
+    padding-right: 5px;
+    line-height: 1.2;
 }
 
-.hover-link > div:nth-child(n+2) {
-    position: absolute;
-    color: var(--accent-color);
-}
-
-.hover-link:hover > div {
+.hover-link:hover>div:nth-child(1) {
     transform: translateY(-100%);
+}
+
+.hover-link:hover>div:nth-child(2) {
+    transform: translateY(-100%);
+}
+
+.hover-link:hover>div:nth-child(3) {
+    transform: translateY(-100%);
+}
+
+.hover-link>div:nth-child(2) {
+    color: var(--accent-color);
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.hover-link>div:nth-child(3) {
+    color: var(--accent-color);
+    position: absolute;
+    top: 200%;
+    left: 0;
 }

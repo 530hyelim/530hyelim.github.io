@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import emailjs from "emailjs-com";
 import { SiVelog } from "react-icons/si";
 import { FaGithub, FaFileAlt, FaSms, FaEnvelope, FaPaperPlane } from "react-icons/fa";
@@ -6,6 +6,7 @@ import profileImg from "../../assets/서혜림5-5미국비자.jpg";
 import resume from '../../assets/이력서_서혜림.pdf';
 import CustomAlert from "../UI/CustomAlert";
 import "./Contact.css";
+import { motion, useAnimation, useInView } from "framer-motion";
 
 const Contact: React.FC = () => {
     const [alert, setAlert] = useState<{ type: "success" | "error", text: string } | null>(null);
@@ -37,12 +38,34 @@ const Contact: React.FC = () => {
             });
     };
 
+    const ref = useRef(null);
+    const inView = useInView(ref, { once: true });
+    const controls = useAnimation();
+
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        }
+    }, [inView, controls]);
+
     return (
-        <section id="contact">
+        <section id="contact" ref={ref}>
             <h1 className="work-section-title">☎ Contacts</h1>
 
-            <div className="contact-section">
-                <div className="contact-container">
+            <motion.div className="contact-section" initial="hidden"
+                animate={controls}
+                variants={{
+                    hidden: {},
+                    visible: {
+                        transition: {
+                            staggerChildren: 0.7,
+                        },
+                    },
+                }}>
+                <motion.div className="contact-container" initial={{ opacity: 0, y: 40 }}
+                    variants={{
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                    }}>
                     <div className="contact-left">
                         <img src={profileImg} alt="Hyelim Seo" className="contact-profile" />
                     </div>
@@ -69,9 +92,13 @@ const Contact: React.FC = () => {
                             </a>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
-                <form className="contact-form contact-container" onSubmit={handleSubmit}>
+                <motion.form className="contact-form contact-container" onSubmit={handleSubmit}
+                    initial={{ opacity: 0, y: 40 }}
+                    variants={{
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                    }}>
                     <h2><FaEnvelope /> Send me an email</h2>
                     <input
                         ref={nameRef}
@@ -94,13 +121,15 @@ const Contact: React.FC = () => {
                     <button type="submit" className="send-btn">
                         <FaPaperPlane /> Send
                     </button>
-                </form>
-            </div>
+                </motion.form>
+            </motion.div>
 
-            {alert && (
-                <CustomAlert type={alert.type} text={alert.text} onClose={() => setAlert(null)} />
-            )}
-        </section>
+            {
+                alert && (
+                    <CustomAlert type={alert.type} text={alert.text} onClose={() => setAlert(null)} />
+                )
+            }
+        </section >
     );
 };
 

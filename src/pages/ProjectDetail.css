@@ -81,6 +81,14 @@
     background: rgba(255, 255, 255, 0.04);
 }
 
+.project-section ul {
+    margin-bottom: 20px;
+}
+
+.project-section li {
+    margin-bottom: 10px;
+}
+
 .project-section h2 {
     font-size: 2rem;
     display: flex;
@@ -100,10 +108,6 @@
     font-size: 1.2rem;
 }
 
-.project-section li {
-    margin-bottom: 10px;
-}
-
 .reference-block {
     border-radius: 16px;
 }
@@ -112,10 +116,20 @@
     background: rgba(255, 255, 255, 0.07);
 }
 
-.reference-img {
-    width: 100%;
-    border-radius: 12px;
+.image-box {
+    aspect-ratio: 5.3 / 3; 
+    background-color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     margin-bottom: 20px;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .reference-details {
@@ -133,6 +147,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 24px;
+}
+
+.cards-block {
+    display: block;
 }
 
 .card {
@@ -166,7 +184,7 @@
 
 .action-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0px 25px rgba(0, 229, 255, 0.4); 
+    box-shadow: 0 0px 25px rgba(0, 229, 255, 0.4);
 }
 
 @media (max-width: 640px) {
@@ -175,6 +193,7 @@
         align-items: center;
         gap: 10px;
     }
+
     .action-button {
         width: 100%;
         text-align: center;

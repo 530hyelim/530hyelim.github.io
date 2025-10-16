@@ -5,6 +5,11 @@ import calendar from './ypjp/calendar.png'
 import structure from './ypjp/structure.png'
 import ucd from './ypjp/ucd.png'
 import erd from './ypjp/erd.png'
+import first from './ypjp/1.png'
+import second from './ypjp/2.png'
+import third from './ypjp/3.png'
+import fourth from './ypjp/4.png'
+import fifth from './ypjp/5.png'
 
 export const ypjp = {
     main,
@@ -14,6 +19,11 @@ export const ypjp = {
     structure,
     ucd,
     erd,
+    first,
+    second,
+    third,
+    fourth,
+    fifth,
 }
 
 import nlmain from './newLearn/main.png'
@@ -24,6 +34,10 @@ import nlcalendar from './newLearn/nlcalendar.png'
 import nlstructure from './newLearn/nlstructure.png'
 import nlucd from './newLearn/nlucd.png'
 import nlerd from './newLearn/nlerd.png'
+import one from './newLearn/1.png'
+import two from './newLearn/2.png'
+import three from './newLearn/3.png'
+import four from './newLearn/4.png'
 
 export const newlearn = {
     main: nlmain,
@@ -34,6 +48,10 @@ export const newlearn = {
     structure: nlstructure,
     ucd: nlucd,
     erd: nlerd,
+    first: one,
+    second: two,
+    third: three,
+    fourth: four,
 }
 
 import langsmith from './icons/langsmith-color.png'

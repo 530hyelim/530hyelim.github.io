@@ -53,7 +53,6 @@ const ProjectDetail: React.FC = () => {
             <motion.header className="project-header" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
                 <h1>{project.title}</h1>
                 <img src={project.img} alt={project.title} />
-                <p>{project.description}</p>
             </motion.header>
 
             <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
@@ -86,26 +85,21 @@ const ProjectDetail: React.FC = () => {
 
             <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
                 <h2>💡 기획 의도</h2>
-                {project.planning.map((plan, idx) => (
-                    <div key={idx}>
-                        <h4>{plan.heading}</h4>
-                        {plan.items && (
-                            <ul>
-                                {plan.items.map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                ))}
+                <ul>
+                    {project.planning.map((plan, idx) => (
+                        <div key={idx}>
+                            <li>{plan.heading}</li>
+                            {plan.items && (
+                                <ul>
+                                    {plan.items.map((item, i) => (
+                                        <li key={i}>{item}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    ))}
+                </ul>
             </motion.section>
-
-            {project.problem && (
-                <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
-                    <h2>🚨 문제 인식 및 배경</h2>
-                    <p>{project.problem}</p>
-                </motion.section>
-            )}
 
             <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
                 <h2>🎯 개발 목표</h2>
@@ -123,13 +117,15 @@ const ProjectDetail: React.FC = () => {
                         <div key={idx} className="reference-block card">
 
                             <div className="reference-header">
-                                <h4>{ref.website.join(" / ")}</h4>
+                                <h4 style={{ textAlign: "center" }}>{ref.website.join(" / ")}</h4>
                             </div>
 
                             <div>
                                 <Slider {...settings}>
                                     {ref.img.map((imgSrc, i) => (
-                                        <img src={imgSrc} alt={ref.website[i] || 'Reference'} className="reference-img" />
+                                        <div className='image-box'>
+                                            <img src={imgSrc} alt={ref.website[i] || 'Reference'} className="img" />
+                                        </div>
                                     ))}
                                 </Slider>
                             </div>
@@ -171,10 +167,12 @@ const ProjectDetail: React.FC = () => {
                 <h2>🗂️ 시스템 설계</h2>
                 <Slider {...settings}>
                     {systemDiagrams.map((diagram, index) => (
-                        <div key={index}>
-                            <img src={diagram.src} alt={diagram.alt} className="reference-img" />
-                            <p>▲ {diagram.alt}</p>
-                        </div>
+                        <>
+                            <p style={{ textAlign: "center" }}>↓ {diagram.alt}</p>
+                            <div key={index} className='image-box'>
+                                <img src={diagram.src} alt={diagram.alt} className="img" />
+                            </div>
+                        </>
                     ))}
                 </Slider>
             </motion.section>
@@ -215,37 +213,125 @@ const ProjectDetail: React.FC = () => {
 
             <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
                 <h2>👩‍💻 담당 역할</h2>
-                {project.role.map((r, i) => (
-                    <div key={i}>
-                        <h4>{r.heading}</h4>
-                        <ul>
-                            {r.items.map((item, j) => (
-                                <li key={j}>{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-            </motion.section>
-
-            <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
-                <h2>🏆 성과 및 배운 점</h2>
                 <ul>
-                    {project.outcome.map((o, i) => (
-                        <li key={i}>{o}</li>
+                    {project.role.map((r, i) => (
+                        <div key={i}>
+                            <li>{r.heading}</li>
+                            <ul>
+                                {r.items?.map((item, j) => (
+                                    <li key={j}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
                     ))}
                 </ul>
             </motion.section>
 
-            {project.improvements && project.improvements.length > 0 && (
-                <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
-                    <h2>🚀 향후 개선 방향</h2>
-                    <ul>
-                        {project.improvements.map((imp, i) => (
-                            <li key={i}>{imp}</li>
-                        ))}
-                    </ul>
-                </motion.section>
-            )}
+            <motion.section className="project-section">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+                >
+                    👩‍💻 상세 구현내용
+                </motion.h2>
+
+                <div className="cards-block">
+                    {project.detail.map((d: any, i: number) => {
+                        // 첫 카드: animate, 나머지: whileInView
+                        if (i === 0) {
+                            return (
+                                <motion.div
+                                    key={i}
+                                    className="card"
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }}
+                                >
+                                    <h4 style={{ textAlign: "center" }}>{d.title}</h4>
+                                    <Slider {...settings}>
+                                        {d.images.map((diagram: string, index: number) => (
+                                            <div key={index} className='image-box'>
+                                                <img src={diagram} alt={diagram} className="img" />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                    <ol>
+                                        {d.description.map((item: any, j: number) => (
+                                            <React.Fragment key={j}>
+                                                <li>{item.heading}</li>
+                                                <ul>
+                                                    {item.items.map((list: string, idx: number) => (
+                                                        <li key={idx}>{list}</li>
+                                                    ))}
+                                                </ul>
+                                            </React.Fragment>
+                                        ))}
+                                    </ol>
+                                </motion.div>
+                            );
+                        } else {
+                            return (
+                                <motion.div
+                                    key={i}
+                                    className="card"
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }}
+                                    viewport={{ once: true, amount: 0.3 }}
+                                >
+                                    <h4 style={{ textAlign: "center" }}>{d.title}</h4>
+                                    <Slider {...settings}>
+                                        {d.images.map((diagram: string, index: number) => (
+                                            <div key={index} className='image-box'>
+                                                <img src={diagram} alt={diagram} className="img" />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                    <ol>
+                                        {d.description.map((item: any, j: number) => (
+                                            <React.Fragment key={j}>
+                                                <li>{item.heading}</li>
+                                                <ul>
+                                                    {item.items.map((list: string, idx: number) => (
+                                                        <li key={idx}>{list}</li>
+                                                    ))}
+                                                </ul>
+                                            </React.Fragment>
+                                        ))}
+                                    </ol>
+                                </motion.div>
+                            );
+                        }
+                    })}
+                </div>
+            </motion.section>
+
+            <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
+                <h2>🏆 성과 및 배운점</h2>
+                <ul>
+                    {project.learnings.map((learning, idx) => (
+                        <li key={idx}>{learning}</li>
+                    ))}
+                </ul>
+            </motion.section>
+
+            <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
+                <h2>🙆‍♀️ 참여 소감</h2>
+                {project.takeaway.map((line, idx) => (
+                    <p key={idx} className="text-gray-700">{line}</p>
+                ))}
+            </motion.section>
+
+            {
+                project.improvements && project.improvements.length > 0 && (
+                    <motion.section className="project-section" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
+                        <h2>🚀 향후 개선 방향</h2>
+                        <ul>
+                            {project.improvements.map((imp, i) => (
+                                <li key={i}>{imp}</li>
+                            ))}
+                        </ul>
+                    </motion.section>
+                )
+            }
 
             <motion.div className="action-bar" variants={fadeInUp} whileInView="visible" viewport={{ once: true, amount: 0.2 }} initial="hidden">
                 {project.websiteUrl && (
@@ -270,7 +356,7 @@ const ProjectDetail: React.FC = () => {
                     </button>
                 )}
             </motion.div>
-        </motion.div>
+        </motion.div >
     );
 };
 
