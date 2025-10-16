@@ -6,6 +6,7 @@ import BackgroundCanvas from './components/Effects/BackgroundCanvas';
 import CustomCursor from './components/Effects/CustomCursor';
 import Header from './components/UI/Header';
 
+// 힝
 const App: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
