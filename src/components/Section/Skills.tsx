@@ -8,7 +8,8 @@ import {
 import {
     SiSpringboot, SiTypescript, SiJenkins, SiTerraform,
     SiGrafana, SiSwagger, SiPostman, SiPrometheus, SiFastapi,
-    SiApachemaven, SiSonarqube, SiSourcetree, SiOracle, SiOpenai
+    SiApachemaven, SiSonarqube, SiSourcetree, SiOracle, SiOpenai,
+    SiPhp, SiMysql
 } from "react-icons/si";
 import './Skills.css';
 
@@ -48,6 +49,14 @@ const Skills: React.FC = () => {
                     <h3>Expert</h3>
                     <div className="icon-grid">
                         <div className="icon-item">
+                            <SiPhp color="#777BB4" />
+                            <span>PHP</span>
+                        </div>
+                        <div className="icon-item">
+                            <SiMysql color="#4479A1" />
+                            <span>MySQL</span>
+                        </div>
+                        <div className="icon-item">
                             <FaHtml5 color="#e44d26" />
                             <span>HTML5</span>
                         </div>
@@ -84,10 +93,6 @@ const Skills: React.FC = () => {
                             <span>MyBatis</span>
                         </div>
                         <div className="icon-item">
-                            <img src={icon.lombok} alt="LangSmith" />
-                            <span>Lombok</span>
-                        </div>
-                        <div className="icon-item">
                             <img src={icon.jsp} alt="LangSmith" />
                             <span>JSP</span>
                         </div>
@@ -104,8 +109,8 @@ const Skills: React.FC = () => {
                     <h3>Intermediate</h3>
                     <div className="icon-grid">
                         <div className="icon-item">
-                            <SiApachemaven color="#C71A36" />
-                            <span>Maven</span>
+                            <img src={icon.lombok} alt="LangSmith" />
+                            <span>Lombok</span>
                         </div>
                         <div className="icon-item">
                             <FaDatabase color="#4db6ac" />
@@ -159,6 +164,10 @@ const Skills: React.FC = () => {
                 >
                     <h3>Basic</h3>
                     <div className="icon-grid">
+                        <div className="icon-item">
+                            <SiApachemaven color="#C71A36" />
+                            <span>Maven</span>
+                        </div>
                         <div className="icon-item">
                             <FaPython color="#3776ab" />
                             <span>Python</span>

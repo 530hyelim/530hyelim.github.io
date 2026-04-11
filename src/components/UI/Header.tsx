@@ -1,5 +1,6 @@
+import { SiVelog } from "react-icons/si";
+import { FaGithub, FaInstagram, FaSms } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import resume from '../../assets/이력서_서혜림.pdf';
 import './Header.css';
 
 interface HeaderProps {
@@ -26,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, toggleMenu, closeMenu }) =>
                 data-cursor-pointer
                 onClick={handleGoTop}
             >
-                HS
+                HyelimSeo
             </div>
 
             <div
@@ -38,12 +39,10 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, toggleMenu, closeMenu }) =>
 
             <nav id="navbar" className={isMenuOpen ? 'nav-visible' : 'nav-hidden'}>
                 <ul className={`nav-list ${isMenuOpen ? 'mobile-nav active' : 'mobile-nav'}`}>
-                    <li><a href="https://github.com/530hyelim" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer>GitHub</a></li>
-                    <li><a href="https://velog.io/@9oofy/posts" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer>Velog</a></li>
-                    <li><a href={resume} target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer>Resume</a></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li><a href="https://github.com/530hyelim" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer><FaGithub /></a></li>
+                    <li><a href="https://velog.io/@9oofy/posts" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer><SiVelog /></a></li>
+                    <li><a href="https://www.instagram.com/90_ofy" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer><FaInstagram /></a></li>
+                    <li><a href="sms:01098392336?body=" data-cursor-pointer><FaSms /></a></li>
                 </ul>
             </nav>
         </header>

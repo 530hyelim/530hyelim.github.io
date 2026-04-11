@@ -52,7 +52,7 @@ interface Project {
     takeaway: string[];
     improvements?: string[];
     websiteUrl?: string;
-    githubUrl: string;
+    githubUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -241,7 +241,7 @@ export const projects: Project[] = [
             '맞춤형 레시피 추천 알고리즘을 구현하여 사용자 UX를 향상시킬 수 있음',
         '식단 섭취 기록 입력 및 식재료 입력 시, 등록된 이미지를 자동으로 분석하여 입력 폼에 바인딩하는 API를 추가함으로써 ' +
         '사용자의 편의성을 높일 수 있음'],
-        websiteUrl: 'https://front.ypjp.store/',
+        // websiteUrl: 'https://front.ypjp.store/',
         githubUrl: 'https://github.com/orgs/kh-powerpuffgirls/repositories'
     }, {
         id: 2,
@@ -412,5 +412,5 @@ export const projects: Project[] = [
             '이러한 경험을 통해 초기 설계와 소통의 중요성을 체감할 수 있었고, 기능 우선순위를 명확히 하면 개발 속도와 코드 품질이 향상된다는 것을 배웠습니다. ' +
             '앞으로도 입사 후에는 체계적인 설계와 협업을 통해 효율적인 개발을 이어가겠습니다.'
         ],
-        githubUrl: 'https://github.com/kh-newlearn/new-learn'
+        githubUrl: 'https://github.com/kh-newlearn'
     }];

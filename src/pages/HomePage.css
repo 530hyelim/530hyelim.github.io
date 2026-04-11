@@ -33,7 +33,7 @@
 
 @media (min-width: 1024px) {
     .land {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 3fr 1fr;
     }
 
     .right-links {
@@ -42,25 +42,21 @@
         align-items: flex-end;
         justify-content: flex-start;
         padding-top: 40px;
-        space-y: 32px;
     }
 }
 
 .space-y-8>*:not(:last-child) {
-    margin-bottom: 32px;
+    margin-bottom: 15px;
 }
 
 .hi {
     font-size: 3.8rem;
-    line-height: 1.1;
     margin-top: 1rem;
-    margin-bottom: 1.5rem;
 }
 
 .state {
     font-size: 1.125rem;
     color: #a0a0a0;
-    line-height: 1.5;
     max-width: 768px;
 }
 

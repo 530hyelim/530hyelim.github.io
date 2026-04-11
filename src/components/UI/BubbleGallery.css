@@ -1,0 +1,39 @@
+.bubble-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.bubble-main {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bubble-thumbs {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.bubble-thumb {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: border-color 0.2s, transform 0.2s;
+    opacity: 0.6;
+}
+
+.bubble-thumb:hover,
+.bubble-thumb.active {
+    border-color: var(--accent-color);
+    transform: scale(1.15);
+    opacity: 1;
+}
