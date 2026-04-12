@@ -32,13 +32,20 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, toggleMenu, closeMenu }) =>
 
             <div
                 id="toggle"
-                className={`toggle ${isMenuOpen ? 'active' : ''}`}
+                className={`toggle ${isMenuOpen ? 'header-toggle-hidden' : ''}`}
                 onClick={toggleMenu}
                 data-cursor-pointer
             ></div>
 
             <nav id="navbar" className={isMenuOpen ? 'nav-visible' : 'nav-hidden'}>
                 <ul className={`nav-list ${isMenuOpen ? 'mobile-nav active' : 'mobile-nav'}`}>
+                    <li className="nav-close-btn">
+                        <div
+                            className={`toggle active`}
+                            onClick={toggleMenu}
+                            data-cursor-pointer
+                        ></div>
+                    </li>
                     <li><a href="https://github.com/530hyelim" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer><FaGithub /></a></li>
                     <li><a href="https://velog.io/@9oofy/posts" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer><SiVelog /></a></li>
                     <li><a href="https://www.instagram.com/90_ofy" target="_blank" rel="noopener noreferrer" onClick={closeMenu} data-cursor-pointer><FaInstagram /></a></li>

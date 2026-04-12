@@ -38,6 +38,11 @@ const App: React.FC = () => {
             --font-inter: 'Inter', sans-serif;
         }
 
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-light);

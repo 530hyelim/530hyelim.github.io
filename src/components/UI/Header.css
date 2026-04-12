@@ -97,8 +97,28 @@
         padding: 20px 20px;
     }
 
+    .logog {
+        font-size: 1.3rem;
+    }
+
     .toggle {
-        display: block;
+        display: inline-block;
+    }
+
+    .nav-close-btn .toggle {
+        display: inline-block;
+        margin-bottom: 4px;
+        width: 28px;
+        height: 2px;
+    }
+
+    .nav-close-btn .toggle::before,
+    .nav-close-btn .toggle::after {
+        width: 28px;
+    }
+
+    .header-toggle-hidden {
+        visibility: hidden;
     }
 
     .nav-hidden {
@@ -113,15 +133,15 @@
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
-        max-width: 300px;
-        height: 100%;
+        width: auto;
+        height: auto;
         background-color: #1a1a1a;
-        padding: 100px 30px;
+        padding: 16px 16px 16px;
+        border-radius: 0 0 0 12px;
         transition: right 0.3s ease-in-out;
         z-index: 999;
         flex-direction: column;
-        gap: 30px;
+        gap: 16px;
     }
 
     .nav-list.active {

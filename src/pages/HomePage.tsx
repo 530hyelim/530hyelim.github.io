@@ -44,6 +44,32 @@ const HomePage: React.FC = () => {
         <Project />
         <Contact />
       </main>
+
+      <nav className="mobile-bottom-nav">
+        {[
+          { href: '#about', text: 'About' },
+          { href: '#skills', text: 'Skills' },
+          { href: '#project', text: 'Project' },
+          { href: '#contact', text: 'Contact' },
+        ].map(({ href, text }) => (
+          <a
+            key={href}
+            href={href}
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById(href.replace('#', ''));
+              if (el) {
+                window.scrollTo({
+                  top: el.getBoundingClientRect().top + window.scrollY - 80,
+                  behavior: 'smooth',
+                });
+              }
+            }}
+          >
+            {text}
+          </a>
+        ))}
+      </nav>
     </div>
   );
 };

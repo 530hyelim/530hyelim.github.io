@@ -52,7 +52,7 @@ const About: React.FC = () => {
                         style={window.innerWidth > 1290 ? {
                             left: positions[i].left,
                             top: positions[i].top,
-                        } : undefined}
+                        } : { position: 'relative', left: 'auto', top: 'auto' }}
                         initial={{ opacity: 0, scale: 0.8, y: 20 }}
                         animate={controls}
                         variants={{
