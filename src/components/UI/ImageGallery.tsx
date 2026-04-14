@@ -53,6 +53,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, showCaption = false
                             src={img.src}
                             alt={img.alt}
                             className={`ig-thumb ${i === active ? 'active' : ''}`}
+                            onTouchEnd={(e) => { e.preventDefault(); setActive(i); }}
                             onClick={() => setActive(i)}
                         />
                     ))}
