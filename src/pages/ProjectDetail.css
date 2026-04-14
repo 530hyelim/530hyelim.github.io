@@ -112,8 +112,10 @@
     border-radius: 16px;
 }
 
-.reference-block:hover {
-    background: rgba(255, 255, 255, 0.07);
+@media (hover: hover) {
+    .reference-block:hover {
+        background: rgba(255, 255, 255, 0.07);
+    }
 }
 
 .image-box {
@@ -167,12 +169,7 @@
 @media (hover: hover) {
     .card:hover {
         transform: translateY(-4px);
-    }
-}
-
-@media (max-width: 768px) {
-    .card:hover {
-        transform: none;
+        background: rgba(255, 255, 255, 0.05);
     }
 }
 
