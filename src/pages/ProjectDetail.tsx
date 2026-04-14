@@ -10,17 +10,16 @@ const fadeInUp: Variants = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
+const isMobile = () => window.innerWidth <= 768;
+const anim = () => isMobile() ? {} : fadeInUp;
+
 const ProjectDetail: React.FC = () => {
     const { projectId } = useParams<{ projectId: string }>();
     const project = projects.find(p => p.id === Number(projectId));
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    useEffect(() => { window.scrollTo(0, 0); }, []);
 
-    const handleScrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    const handleScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (!project) return <div>프로젝트를 찾을 수 없습니다.</div>;
 
@@ -31,38 +30,30 @@ const ProjectDetail: React.FC = () => {
         { src: project.erDiagram, alt: "ER 다이어그램" },
     ];
 
-    return (
-        <motion.div className="project-detail-container" initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}>
-            <Link to="/" className="backtohome-link font-bold">
-                ← Back to Home
-            </Link>
+    const wrapperVariants = isMobile()
+        ? undefined
+        : { hidden: {}, visible: { transition: { staggerChildren: 0.15 } } };
 
-            <motion.header className="project-header" variants={fadeInUp}>
+    return (
+        <motion.div className="project-detail-container" initial="hidden" animate="visible" variants={wrapperVariants}>
+            <Link to="/" className="backtohome-link font-bold">← Back to Home</Link>
+
+            <motion.header className="project-header" variants={anim()}>
                 <h1>{project.title}</h1>
                 <img src={project.img} alt={project.title} />
             </motion.header>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>🧩 기술 스택</h2>
                 <div className="tech-stack-table-wrapper tech-stack-desktop">
                     <table className="tech-stack-table">
                         <thead>
-                            <tr>
-                                {Object.keys(project.techStack).map((key) => (
-                                    <th key={key}>{key.toUpperCase()}</th>
-                                ))}
-                            </tr>
+                            <tr>{Object.keys(project.techStack).map((key) => <th key={key}>{key.toUpperCase()}</th>)}</tr>
                         </thead>
                         <tbody>
                             <tr>
                                 {Object.values(project.techStack).map((values, index) => (
-                                    <td key={index}>
-                                        <ul>
-                                            {values.map((v) => (
-                                                <li key={v}>{v}</li>
-                                            ))}
-                                        </ul>
-                                    </td>
+                                    <td key={index}><ul>{values.map((v) => <li key={v}>{v}</li>)}</ul></td>
                                 ))}
                             </tr>
                         </tbody>
@@ -72,46 +63,32 @@ const ProjectDetail: React.FC = () => {
                     {Object.entries(project.techStack).filter(([key]) => key !== 'os').map(([key, values]) => (
                         <div key={key} className="tech-stack-mobile-item">
                             <strong>{key.toUpperCase()}</strong>
-                            <ul>
-                                {values.map((v) => (
-                                    <li key={v}>{v}</li>
-                                ))}
-                            </ul>
+                            <ul>{values.map((v) => <li key={v}>{v}</li>)}</ul>
                         </div>
                     ))}
                 </div>
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>💡 기획 의도</h2>
                 <ul>
                     {project.planning.map((plan, idx) => (
                         <div key={idx}>
                             <li>{plan.heading}</li>
-                            {plan.items && (
-                                <ul>
-                                    {plan.items.map((item, i) => (
-                                        <li key={i}>{item}</li>
-                                    ))}
-                                </ul>
-                            )}
+                            {plan.items && <ul>{plan.items.map((item, i) => <li key={i}>{item}</li>)}</ul>}
                         </div>
                     ))}
                 </ul>
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>🎯 개발 목표</h2>
-                <ul>
-                    {project.goals.map((goal, i) => (
-                        <li key={i}>{goal}</li>
-                    ))}
-                </ul>
+                <ul>{project.goals.map((goal, i) => <li key={i}>{goal}</li>)}</ul>
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>🔍 레퍼런스 분석</h2>
-                <div className='cards-grid'>
+                <div className="cards-grid">
                     {project.references.map((ref, idx) => (
                         <div key={idx} className="reference-block card">
                             <div className="reference-header">
@@ -121,28 +98,16 @@ const ProjectDetail: React.FC = () => {
                             <div className="reference-details">
                                 <div>
                                     <strong>👍 좋은 점</strong>
-                                    <ul>
-                                        {ref.goods.map((g, i) => (
-                                            <li key={i}>{g}</li>
-                                        ))}
-                                    </ul>
+                                    <ul>{ref.goods.map((g, i) => <li key={i}>{g}</li>)}</ul>
                                 </div>
                                 <div>
                                     <strong>👎 아쉬운 점</strong>
-                                    <ul>
-                                        {ref.bads.map((b, i) => (
-                                            <li key={i}>{b}</li>
-                                        ))}
-                                    </ul>
+                                    <ul>{ref.bads.map((b, i) => <li key={i}>{b}</li>)}</ul>
                                 </div>
                                 {ref.improvements && ref.improvements.length > 0 && (
                                     <div>
                                         <strong>✨ 개선 방향</strong>
-                                        <ul>
-                                            {ref.improvements.map((imp, i) => (
-                                                <li key={i}>{imp}</li>
-                                            ))}
-                                        </ul>
+                                        <ul>{ref.improvements.map((imp, i) => <li key={i}>{imp}</li>)}</ul>
                                     </div>
                                 )}
                             </div>
@@ -151,62 +116,50 @@ const ProjectDetail: React.FC = () => {
                 </div>
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>🗂️ 시스템 설계</h2>
                 <ImageGallery images={systemDiagrams} showCaption />
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>⚙️ 주요 기능</h2>
-                <div className='cards-grid'>
+                <div className="cards-grid">
                     {project.features.map((f, i) => (
-                        <div key={i} className='card'>
+                        <div key={i} className="card">
                             <h4>{f.heading}</h4>
-                            <ul>
-                                {f.items.map((item, j) => (
-                                    <li key={j}>{item}</li>
-                                ))}
-                            </ul>
+                            <ul>{f.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
                         </div>
                     ))}
                 </div>
             </motion.section>
 
             {project.adminFeatures && (
-                <motion.section className="project-section" variants={fadeInUp}>
+                <motion.section className="project-section" variants={anim()}>
                     <h2>🛠 관리자 기능</h2>
-                    <div className='cards-grid'>
+                    <div className="cards-grid">
                         {project.adminFeatures.map((f, i) => (
-                            <div key={i} className='card'>
+                            <div key={i} className="card">
                                 <h4>{f.heading}</h4>
-                                <ul>
-                                    {f.items.map((item, j) => (
-                                        <li key={j}>{item}</li>
-                                    ))}
-                                </ul>
+                                <ul>{f.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
                             </div>
                         ))}
                     </div>
                 </motion.section>
             )}
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>👩‍💻 담당 역할</h2>
                 <ul>
                     {project.role.map((r, i) => (
                         <div key={i}>
                             <li>{r.heading}</li>
-                            <ul>
-                                {r.items?.map((item, j) => (
-                                    <li key={j}>{item}</li>
-                                ))}
-                            </ul>
+                            {r.items && <ul>{r.items.map((item, j) => <li key={j}>{item}</li>)}</ul>}
                         </div>
                     ))}
                 </ul>
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>👩‍💻 상세 구현내용</h2>
                 <div className="cards-block">
                     {project.detail.map((d: any, i: number) => (
@@ -217,11 +170,7 @@ const ProjectDetail: React.FC = () => {
                                 {d.description.map((item: any, j: number) => (
                                     <React.Fragment key={j}>
                                         <li>{item.heading}</li>
-                                        <ul>
-                                            {item.items.map((list: string, idx: number) => (
-                                                <li key={idx}>{list}</li>
-                                            ))}
-                                        </ul>
+                                        <ul>{item.items.map((list: string, idx: number) => <li key={idx}>{list}</li>)}</ul>
                                     </React.Fragment>
                                 ))}
                             </ol>
@@ -230,50 +179,32 @@ const ProjectDetail: React.FC = () => {
                 </div>
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>🏆 성과 및 배운점</h2>
-                <ul>
-                    {project.learnings.map((learning, idx) => (
-                        <li key={idx}>{learning}</li>
-                    ))}
-                </ul>
+                <ul>{project.learnings.map((learning, idx) => <li key={idx}>{learning}</li>)}</ul>
             </motion.section>
 
-            <motion.section className="project-section" variants={fadeInUp}>
+            <motion.section className="project-section" variants={anim()}>
                 <h2>🙆‍♀️ 참여 소감</h2>
-                {project.takeaway.map((line, idx) => (
-                    <p key={idx} className="text-gray-700">{line}</p>
-                ))}
+                {project.takeaway.map((line, idx) => <p key={idx} className="text-gray-700">{line}</p>)}
             </motion.section>
 
             {project.improvements && project.improvements.length > 0 && (
-                <motion.section className="project-section" variants={fadeInUp}>
+                <motion.section className="project-section" variants={anim()}>
                     <h2>🚀 향후 개선 방향</h2>
-                    <ul>
-                        {project.improvements.map((imp, i) => (
-                            <li key={i}>{imp}</li>
-                        ))}
-                    </ul>
+                    <ul>{project.improvements.map((imp, i) => <li key={i}>{imp}</li>)}</ul>
                 </motion.section>
             )}
 
-            <motion.div className="action-bar" variants={fadeInUp}>
+            <motion.div className="action-bar" variants={anim()}>
                 {project.websiteUrl && (
-                    <button
-                        className="action-button"
-                        onClick={() => window.open(project.websiteUrl, "_blank", "noopener,noreferrer")}
-                    >
+                    <button className="action-button" onClick={() => window.open(project.websiteUrl, "_blank", "noopener,noreferrer")}>
                         홈페이지 이동
                     </button>
                 )}
-                <button onClick={handleScrollToTop} className="action-button">
-                    처음으로
-                </button>
+                <button onClick={handleScrollToTop} className="action-button">처음으로</button>
                 {project.githubUrl && (
-                    <button
-                        className="action-button"
-                        onClick={() => window.open(project.githubUrl, "_blank", "noopener,noreferrer")}
-                    >
+                    <button className="action-button" onClick={() => window.open(project.githubUrl, "_blank", "noopener,noreferrer")}>
                         코드 보러가기
                     </button>
                 )}
