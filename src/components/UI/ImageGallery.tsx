@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -22,29 +22,7 @@ const sliderSettings = {
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images, showCaption = false }) => {
     const isMobile = useRef(window.innerWidth <= 768).current;
-    const mainImgRef = useRef<HTMLImageElement>(null);
-    const captionRef = useRef<HTMLParagraphElement>(null);
-    const thumbRefs = useRef<(HTMLImageElement | null)[]>([]);
-
-    const handleSelect = (i: number) => {
-        // DOM 직접 업데이트로 리렌더 최소화
-        if (mainImgRef.current) {
-            mainImgRef.current.src = images[i].src;
-            mainImgRef.current.alt = images[i].alt;
-        }
-        if (captionRef.current) {
-            captionRef.current.textContent = `↓ ${images[i].alt}`;
-        }
-        thumbRefs.current.forEach((el, idx) => {
-            if (!el) return;
-            el.classList.toggle('active', idx === i);
-        });
-    };
-
-    useEffect(() => {
-        // 초기 active 썸네일 설정
-        thumbRefs.current[0]?.classList.add('active');
-    }, []);
+    const [active, setActive] = useState(0);
 
     if (!isMobile) {
         return (
@@ -64,24 +42,25 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, showCaption = false
     return (
         <div className="ig-container">
             {showCaption && (
-                <p ref={captionRef} style={{ textAlign: 'center', fontSize: '0.85rem', color: '#a0a0a0' }}>
-                    ↓ {images[0].alt}
+                <p style={{ textAlign: 'center', fontSize: '0.85rem', color: '#a0a0a0' }}>
+                    ↓ {images[active].alt}
                 </p>
             )}
-            <div className="ig-main image-box">
-                <img ref={mainImgRef} src={images[0].src} alt={images[0].alt} className="img" />
-            </div>
+            <img
+                    src={images[active].src}
+                    alt={images[active].alt}
+                    className="ig-main-img img"
+                />
             {images.length > 1 && (
                 <div className="ig-thumbs">
                     {images.map((img, i) => (
                         <img
                             key={i}
-                            ref={(el) => { thumbRefs.current[i] = el; }}
                             src={img.src}
                             alt={img.alt}
-                            className={`ig-thumb ${i === 0 ? 'active' : ''}`}
-                            onTouchEnd={(e) => { e.preventDefault(); handleSelect(i); }}
-                            onClick={() => handleSelect(i)}
+                            className={`ig-thumb ${i === active ? 'active' : ''}`}
+                            onMouseEnter={() => setActive(i)}
+                            onClick={() => setActive(i)}
                         />
                     ))}
                 </div>
