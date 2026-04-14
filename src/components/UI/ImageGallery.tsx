@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -22,7 +22,6 @@ const sliderSettings = {
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images, showCaption = false }) => {
     const isMobile = useRef(window.innerWidth <= 768).current;
-    const [active, setActive] = useState(0);
     const mainImgRef = useRef<HTMLImageElement>(null);
     const captionRef = useRef<HTMLParagraphElement>(null);
     const thumbRefs = useRef<(HTMLImageElement | null)[]>([]);
@@ -40,7 +39,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, showCaption = false
             if (!el) return;
             el.classList.toggle('active', idx === i);
         });
-        setActive(i);
     };
 
     useEffect(() => {
