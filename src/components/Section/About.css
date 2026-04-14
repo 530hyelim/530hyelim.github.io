@@ -48,7 +48,15 @@
 
     .timeline-horizontal-item {
         position: relative !important;
-        width: 50%;
+        width: 70%;
+    }
+
+    .timeline-content h3 {
+        font-size: 1rem;
+    }
+
+    .timeline-content p {
+        font-size: smaller;
     }
 
     .timeline-content {

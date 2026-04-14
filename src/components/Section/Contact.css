@@ -86,6 +86,45 @@
     }
 }
 
+@media (max-width: 768px) {
+    .contact-section {
+        margin-bottom: 5rem;
+        padding: 0 5%;
+        box-sizing: border-box;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .contact-container {
+        width: 100%;
+        box-sizing: border-box;
+        min-width: 0;
+    }
+
+    .contact-container h2 {
+        font-size: 1.3rem;
+    }
+
+    .contact-right h2 {
+        font-size: 1.3rem;
+    }
+
+    .contact-links a {
+        font-size: 1.4rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+    }
+
+    .contact-form button {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+}
+
 .contact-form button:hover {
     transform: scale(1.05);
 }

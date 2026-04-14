@@ -22,6 +22,9 @@ const Project: React.FC = () => {
                         <div className={`rdiv order-1 ${index % 2 === 0 ? 'lg-order-2' : 'lg-order-1'}`}>
                             <h1 className="project-num font-mono">#{project.id.toString().padStart(2, '0')}</h1>
                             <h1 className="project-title font-black text-white">{project.title}</h1>
+                            <div className="project-img-mobile">
+                                <img src={project.img} alt={project.title} className="divimg" />
+                            </div>
                             <p className="project-subtitle">{project.subtitle}</p>
                             <Link
                                 className="project-link font-bold"

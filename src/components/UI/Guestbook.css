@@ -136,3 +136,31 @@
     cursor: not-allowed;
     transform: none;
 }
+
+@media (max-width: 768px) {
+    .guestbook h2 {
+        font-size: 1.2rem;
+    }
+
+    .guestbook-form input {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+    }
+
+    .guestbook-form button {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    .guestbook-name {
+        font-size: 0.75rem;
+    }
+
+    .guestbook-message {
+        font-size: 0.75rem;
+    }
+
+    .guestbook-date {
+        font-size: 0.65rem;
+    }
+}

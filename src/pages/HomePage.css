@@ -49,6 +49,10 @@
     .right-links {
         display: none;
     }
+
+    .work-section-title {
+        margin-top: 10rem;
+    }
 }
 
 .space-y-8>*:not(:last-child) {
@@ -62,7 +66,11 @@
 
 @media (max-width: 768px) {
     .hi {
-        font-size: 1.6rem;
+        font-size: 2.1rem;
+    }
+
+    .hero-section {
+        padding-top: 0;
     }
 }
 

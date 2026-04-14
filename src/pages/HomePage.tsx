@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
                   </h2>
                   <h2 className="hi font-black text-white">
                     한국어보다 Java가 편한<br />
-                    풀스택 개발자 서혜림 입니다 😎
+                    개발자 서혜림 입니다 😎
                   </h2>
                   <h2 className="state">
                   </h2>

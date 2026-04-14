@@ -37,3 +37,15 @@
     transform: scale(1.15);
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+    .bubble-main {
+        width: 200px;
+        height: 200px;
+    }
+
+    .bubble-thumb {
+        width: 28px;
+        height: 28px;
+    }
+}

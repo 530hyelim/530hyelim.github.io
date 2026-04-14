@@ -26,3 +26,15 @@
     transform: translate(-50%, 0);
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+    .custom-alert {
+        bottom: auto;
+        top: 80px;
+        transform: translate(-50%, -50px);
+    }
+
+    .custom-alert.active {
+        transform: translate(-50%, 0);
+    }
+}

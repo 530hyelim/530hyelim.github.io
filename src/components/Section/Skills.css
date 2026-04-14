@@ -51,12 +51,36 @@
 }
 
 @media (max-width: 768px) {
-    .icon-item {
-        width: 70px;
-        font-size: 0.8rem;
+    .expertise-3col {
+        margin-bottom: 2rem;
     }
 
-    .icon-item svg {
+    .expertise-col {
+        width: 80%;
+        max-width: 80%;
+        padding: 1rem;
+    }
+
+    .expertise-col h3 {
+        font-size: 1.3rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.3rem;
+    }
+
+    .icon-grid {
+        padding: 0;
+    }
+
+    .icon-item {
+        width: 50px;
+        font-size: 0.7rem;
+        text-align: center;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+
+    .icon-item svg,
+    .icon-item img {
         width: 50px;
         height: 50px;
     }
