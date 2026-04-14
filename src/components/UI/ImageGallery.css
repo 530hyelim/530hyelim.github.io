@@ -29,3 +29,15 @@
     border-color: var(--accent-color);
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+    .ig-thumb:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        opacity: 0.6;
+    }
+
+    .ig-thumb.active {
+        border-color: var(--accent-color);
+        opacity: 1;
+    }
+}
